@@ -21,7 +21,8 @@ class Application(tk.Frame):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
         self.MenuBar()
-        self.SpaceLabel(row=0, column=0)
+        self.TitleLabel(row=0, column=0)
+        #self.SpaceLabel(row=0, column=0)
 
         # Blue Button
         self.blueSong = tk.StringVar()
@@ -167,6 +168,14 @@ class Application(tk.Frame):
         self.spaceLabel.grid(row=row, column=column)
         self.spaceLabel.grid_columnconfigure(column, weight=1)
         self.spaceLabel.grid_rowconfigure(row, weight=1)
+
+    def TitleLabel(self, row, column):
+        self.title = 'Welcome To My Music!\nSelect which song you want to apply to\
+ each button!'
+        self.titleLabel = tk.Label(self, bg='paleturquoise', text=self.title,
+                                   font=15)
+        self.titleLabel.grid(row=row, column=column, columnspan=2)
+        self.grid_columnconfigure(column, weight=1)
 
 
 root = tk.Tk()
