@@ -21,33 +21,44 @@ class Application(tk.Frame):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
         self.MenuBar()
+        self.SpaceLabel(row=0, column=0)
 
         # Blue Button
         self.blueSong = tk.StringVar()
-        self.blueSongLabel = tk.Label(self, textvariable=self.blueSong)
+        self.blueSongLabel = tk.Label(self, textvariable=self.blueSong,
+                                      padx=20, bg='white')
         self.blueSongLabel.grid(row=2, column=1)
         self.ChooseSongButton('Blue', row=2, column=0)
-        self.PlayButton('Blue', row=3, column=0)
+        self.PlayButton('Blue', row=3, column=1)
+        self.SpaceLabel(row=4, column=0)
 
         # Red Button
         self.redSong = tk.StringVar()
-        self.redSongLabel = tk.Label(self, textvariable=self.redSong)
+        self.redSongLabel = tk.Label(self, textvariable=self.redSong,
+                                     padx=20, bg='white')
         self.redSongLabel.grid(row=5, column=1)
         self.ChooseSongButton('Red', row=5, column=0)
-        self.PlayButton('Red', row=6, column=0)
+        self.PlayButton('Red', row=6, column=1)
+        self.SpaceLabel(row=7, column=0)
 
         # Yellow Button
         self.yellowSong = tk.StringVar()
-        self.yellowSongLabel = tk.Label(self, textvariable=self.yellowSong)
+        self.yellowSongLabel = tk.Label(self, textvariable=self.yellowSong,
+                                        padx=20, bg='white')
         self.yellowSongLabel.grid(row=8, column=1)
         self.ChooseSongButton('Yellow', row=8, column=0)
-        self.PlayButton('Yellow', row=9, column=0)
+        self.PlayButton('Yellow', row=9, column=1)
+        self.SpaceLabel(row=10, column=0)
 
         # Stop Music
         self.StopMusicButton(row=11, column=0)
+        #self.SpaceLabel(row=12, column=0)
 
         # Close
-        self.QuitButton(row=12, column=0)
+        self.QuitButton(row=11, column=1)
+        self.SpaceLabel(row=15, column=0)
+
+    # Start of Functions Section
 
     def MenuBar(self):
         # Menu Bar (file and help sit within)
@@ -89,10 +100,10 @@ class Application(tk.Frame):
                                       follow_symlinks=True)
             self.savedSongs[color] = self.musicFilePath
             for song in os.listdir(f'MusicFiles\{color}'):
-                self.songTitle=song
-            if color=='Blue':
+                self.songTitle = song
+            if color == 'Blue':
                 self.blueSong.set(self.songTitle)
-            elif color=='Red':
+            elif color == 'Red':
                 self.redSong.set(self.songTitle)
             else:
                 self.yellowSong.set(self.songTitle)
@@ -102,12 +113,11 @@ class Application(tk.Frame):
             self.SelectSong(color)
 
     def ChooseSongButton(self, color, row, column):
-        self.chooseSongButton = ttk.Button(self, text=f'Song for {color} Button',
-                                     command=lambda: self.SelectSong(color))
-        self.chooseSongButton.grid(row=row, column=column, sticky='w')
+        self.chooseSongButton = tk.Button(self, text=f'Select Song for {color} Button',
+                                          command=lambda: self.SelectSong(color))
+        self.chooseSongButton.config(padx=15, pady=10)
+        self.chooseSongButton.grid(row=row, column=column, sticky='we')
         self.grid_columnconfigure(column, minsize=200, pad=1, weight=1)
-
-
 
     def PlaySong(self, color):
         pygame.mixer.init()
@@ -115,23 +125,27 @@ class Application(tk.Frame):
         pygame.mixer.music.play()
 
     def PlayButton(self, color, row, column):
-        self.playButton = ttk.Button(self, text=f'Play {color} Button',
-                               command=lambda: self.PlaySong(color))
+        self.playButton = tk.Button(self, text=f'Play {color} Button',
+                                    command=lambda: self.PlaySong(color))
+        self.playButton.config(padx=10, pady=5)
         self.playButton.grid(row=row, column=column, columnspan=2, rowspan=1,
-                        sticky='w')
-
-
+                             sticky='we')
 
     def QuitButton(self, row, column):
-        self.quitButton = ttk.Button(self, text='Close',
+        self.quitButton = tk.Button(self, text='Close',
                                     command=lambda: self.CloseActions())
                                     #command=self.master.destroy)
-        self.quitButton.grid(row=row, column=column, sticky='wnse')
+        self.quitButton.config()
+        self.quitButton.grid(row=row, column=column, sticky='nsew', rowspan=2,
+                             columnspan=2)
+        self.grid_columnconfigure(column, weight=2)
+        self.quitButton.grid_rowconfigure(row, weight=1)
 
     def StopMusicButton(self, row, column):
-        self.stopMusicButton = ttk.Button(self, text='Stop Music',
+        self.stopMusicButton = tk.Button(self, text='Stop Music', height=5,
                                          command=lambda: pygame.mixer.music.stop())
-        self.stopMusicButton.grid(row=row, column=column, sticky='wnse')
+        self.stopMusicButton.grid(row=row, column=column, sticky='wnse', rowspan=2)
+        self.grid_columnconfigure(column, weight=1)
 
     def CloseMusic(self):
         try:
@@ -148,12 +162,15 @@ class Application(tk.Frame):
         self.CloseMusic()
         self.Close()
 
-
-
+    def SpaceLabel(self, row, column):
+        self.spaceLabel = tk.Label(self, bg='white')
+        self.spaceLabel.grid(row=row, column=column)
+        self.spaceLabel.grid_columnconfigure(column, weight=1)
+        self.spaceLabel.grid_rowconfigure(row, weight=1)
 
 
 root = tk.Tk()
-root.minsize(300,500)
+root.minsize(350,420)
 root.configure(bg='white')
 root.title('My Music Player')
 app = Application(master=root)
