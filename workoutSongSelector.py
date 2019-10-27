@@ -19,7 +19,7 @@ root.minsize(500, 500)
 redSong = []
 
 songPaths = {}
-
+songTitle = {}
 
 def DirectoryChooser(color):
     color = color.title()
@@ -50,6 +50,9 @@ def DirectoryChooser(color):
         songPaths[color] = musicFilePath
         print(f'Path for song is now:{musicFilePath}')
         # redSong.append(musicFilePath)
+        print(f'The song title will be: {songTitle}')
+        for song in os.listdir(f'MusicFiles\{color}'):
+            songTitle[color] = song
     else:
         message = 'Sorry but that is an unsuported audio type.\nPlease chose one of the following: .wav, .mp3, .m4a'
         messagebox.showinfo('Unsuported Audio', message)
