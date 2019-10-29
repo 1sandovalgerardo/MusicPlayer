@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import os
+from tkinter.messagebox import showinfo
+from tkinter import Tk
+
 
 
 def CreateMusicFiles():
@@ -13,3 +16,11 @@ def CreateMusicFiles():
         os.mkdir('Red')
         os.mkdir('Yellow')
         os.chdir('..')
+    elif 'MusicFiles' in existingFiles:
+        return None
+
+    else:
+        root=Tk()
+        showinfo('Error in Code', 'We apologize but there is an issue creating the neccessary supporting folders.\
+                 \nError Code: 876')
+        root.destroy()
