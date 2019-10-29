@@ -1,8 +1,9 @@
 from ProgFile.MyMusicFuncs import *
+from ProgFile.FolderCreator import *
 import tkinter as tk
 
 
-def MiMusica():
+def myMusic():
     print('running MiMusica')
     root = tk.Tk()
     root.minsize(350,420)
@@ -12,7 +13,8 @@ def MiMusica():
     app.mainloop()
 
 if __name__=='__main__':
-    MiMusica()
+    CreateMusicFiles()
+    myMusic()
 
 else:
     print('not running as main')
