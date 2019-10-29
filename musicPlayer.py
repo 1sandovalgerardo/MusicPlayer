@@ -4,7 +4,7 @@ import tkinter as tk
 
 
 def myMusic():
-    print('running MiMusica')
+    print('running My Music')
     root = tk.Tk()
     root.minsize(350,420)
     root.configure(bg='white')
