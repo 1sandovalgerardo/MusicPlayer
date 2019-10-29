@@ -22,6 +22,5 @@ def GetVolume(control):
 
 button = tk.Button(root, text='Volumen Level', command=lambda: GetVolume(volumeControl))
 button.pack()
-print(volumeLevel)
 
 root.mainloop()
