@@ -110,7 +110,7 @@ class Application(tk.Frame):
                 self.yellowSong.set(self.songTitle)
         else:
             self.message = 'Sorry but that is an unsuported audio type.\nPlease chose one of the following: .wav, .mp3, .m4a'
-            self.messagebox.showinfo('Unsuported Audio', self.message)
+            messagebox.showinfo('Unsuported Audio', self.message)
             self.SelectSong(color)
 
     def ChooseSongButton(self, color, row, column):
@@ -177,11 +177,4 @@ class Application(tk.Frame):
         self.titleLabel.grid(row=row, column=column, columnspan=2)
         self.grid_columnconfigure(column, weight=1)
 
-
-root = tk.Tk()
-root.minsize(350,420)
-root.configure(bg='white')
-root.title('My Music Player')
-app = Application(master=root)
-app.mainloop()
 
