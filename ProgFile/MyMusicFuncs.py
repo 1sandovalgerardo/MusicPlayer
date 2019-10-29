@@ -110,7 +110,7 @@ class Application(tk.Frame):
                 self.yellowSong.set(self.songTitle)
         else:
             self.message = 'Sorry but that is an unsuported audio type.\nPlease chose one of the following: .wav, .mp3, .m4a'
-            self.messagebox.showinfo('Unsuported Audio', self.message)
+            messagebox.showinfo('Unsuported Audio', self.message)
             self.SelectSong(color)
 
     def ChooseSongButton(self, color, row, column):
